@@ -1,8 +1,5 @@
 import { useState } from "react";
-import {
-  ValidationTypeProps,
-  validateProps,
-} from "../../components/Contact/types";
+import { validateProps } from "../../components/Contact/types";
 
 interface SubmitProps {
   name: string;
