@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import { Row, Col, Drawer } from "antd";
 import { withTranslation, TFunction } from "react-i18next";
 import Container from "../../common/Container";
-import { ThemedSvgIcon } from "../../common/ThemedSvgIcon";
 import { Button } from "../../common/Button";
 import { useTheme } from "../../styles/ThemeContext";
 import { useTranslation } from "react-i18next";
@@ -10,6 +9,7 @@ import { Switch } from "../ui/switch";
 import {
   HeaderSection,
   LogoContainer,
+  LogoText,
   Burger,
   NotHidden,
   Menu,
@@ -19,6 +19,7 @@ import {
   Outline,
   Span,
   ThemeToggleButton,
+  NavLink,
 } from "./styles";
 import { Link } from "react-router-dom";
 
@@ -30,14 +31,18 @@ const Header = ({ t }: { t: TFunction }) => {
     setVisibility(!visible);
   };
 
-  const MenuItem = () => {
-    const scrollTo = (id: string) => {
-      const element = document.getElementById(id) as HTMLDivElement;
+  const scrollToSection = (id: string) => {
+    const element = document.getElementById(id);
+    if (element) {
       element.scrollIntoView({
         behavior: "smooth",
+        block: "start",
       });
-      setVisibility(false);
-    };
+    }
+    setVisibility(false);
+  };
+
+  const MenuItem = () => {
     return (
       <>
         <CustomNavLinkSmall to="/">
@@ -52,7 +57,7 @@ const Header = ({ t }: { t: TFunction }) => {
         <CustomNavLinkSmall to="/policy">
           <Span>{t("Policy")}</Span>
         </CustomNavLinkSmall>
-        <ScrollNavLink onClick={() => scrollTo("contact")}>
+        <ScrollNavLink onClick={() => scrollToSection("contact")}>
           <Button color="header">{t("Contact")}</Button>
         </ScrollNavLink>
         <ThemeToggleButton>
@@ -65,27 +70,39 @@ const Header = ({ t }: { t: TFunction }) => {
   return (
     <HeaderSection>
       <Container>
-        <Row justify="space-between">
-          <LogoContainer to="/" aria-label="homepage">
-            <Link to="/">
-              <ThemedSvgIcon src="logo.svg" width="101px" height="64px" />
-            </Link>
+        <Row justify="space-between" align="middle">
+          <LogoContainer to="/">
+            <LogoText>Mime Technology</LogoText>
           </LogoContainer>
           <NotHidden>
-            <MenuItem />
+            <NavLink to="/">
+              <Span>{t("Home")}</Span>
+            </NavLink>
+            <NavLink to="/about">
+              <Span>{t("About")}</Span>
+            </NavLink>
+            <NavLink to="/contact">
+              <Span>{t("Contact")}</Span>
+            </NavLink>
+            <NavLink to="/policy">
+              <Span>{t("Policy")}</Span>
+            </NavLink>
+            <ScrollNavLink onClick={() => scrollToSection("contact")}>
+              <Button color="header">{t("Contact")}</Button>
+            </ScrollNavLink>
+            <ThemeToggleButton>
+              <Switch checked={isDarkMode} onCheckedChange={toggleTheme} />
+            </ThemeToggleButton>
           </NotHidden>
-          <Burger onClick={toggleButton}>
-            <Outline />
+          <Burger>
+            <Outline onClick={toggleButton} />
           </Burger>
         </Row>
-        <Drawer closable={false} open={visible} onClose={toggleButton}>
-          <Col style={{ marginBottom: "2.5rem" }}>
+        <Drawer closable={false} visible={visible} onClose={toggleButton}>
+          <Col style={{ marginBottom: "2rem" }}>
             <Label onClick={toggleButton}>
-              <Col span={12}>
+              <Col span={24}>
                 <Menu>{t("Menu")}</Menu>
-              </Col>
-              <Col span={12}>
-                <Outline />
               </Col>
             </Label>
           </Col>

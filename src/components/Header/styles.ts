@@ -40,6 +40,26 @@ export const LogoContainer = styled(Link)`
   }
 `;
 
+export const LogoText = styled("span")`
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: ${({ theme }: { theme: Theme }) => theme.text};
+  letter-spacing: 0.5px;
+  background: linear-gradient(
+    135deg,
+    ${({ theme }: { theme: Theme }) => theme.primary},
+    ${({ theme }: { theme: Theme }) => theme.secondary}
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  transition: all 0.3s ease;
+
+  &:hover {
+    transform: translateY(-1px);
+    filter: brightness(1.1);
+  }
+`;
+
 export const NavLink = styled(Link)`
   color: ${({ theme }: { theme: Theme }) => theme.text};
   display: flex;
@@ -50,27 +70,24 @@ export const NavLink = styled(Link)`
   text-decoration: none;
   position: relative;
   font-weight: 500;
-  transition: color 0.3s ease;
-  margin: 0;
+  transition: all 0.3s ease;
 
   &:after {
     content: "";
     position: absolute;
-    width: 100%;
+    width: 0;
     height: 2px;
-    bottom: -2px;
-    left: 0;
-    background: ${({ theme }: { theme: Theme }) => theme.text};
-    transform: scaleX(0);
-    transform-origin: right;
-    transition: transform 0.3s ease;
+    bottom: 0;
+    left: 50%;
+    background: ${({ theme }: { theme: Theme }) => theme.primary};
+    transition: all 0.3s ease;
+    transform: translateX(-50%);
   }
 
   &:hover {
     color: ${({ theme }: { theme: Theme }) => theme.primary};
     &:after {
-      transform: scaleX(1);
-      transform-origin: left;
+      width: 100%;
     }
   }
 `;
@@ -211,13 +228,8 @@ export const Span = styled("span")`
   display: flex;
   align-items: center;
 
-  &:hover,
-  &:active,
-  &:focus {
-    color: ${({ theme }: { theme: Theme }) => theme.text};
-    text-underline-position: under;
-    text-decoration: ${({ theme }: { theme: Theme }) => theme.text} wavy
-      underline;
+  &:hover {
+    color: ${({ theme }: { theme: Theme }) => theme.primary};
   }
 `;
 

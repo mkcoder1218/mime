@@ -8,5 +8,14 @@ export interface ContactProps {
 }
 
 export interface ValidationTypeProps {
-  type: string;
+  name?: string;
+  email?: string;
+  message?: string;
+  type?: string;
+}
+
+export interface validateProps {
+  name?: string;
+  email?: string;
+  message?: string;
 }
