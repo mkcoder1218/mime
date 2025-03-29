@@ -1,6 +1,5 @@
 import styled from "styled-components";
 import { Link } from "react-router-dom";
-import { MenuOutlined } from "@ant-design/icons";
 import { Theme } from "../../styles/ThemeContext";
 import { Drawer as AntDrawer } from "antd";
 
@@ -73,7 +72,7 @@ export const NavLink = styled(Link)`
   font-weight: 500;
   transition: all 0.3s ease;
 
-  &:after {
+  &:before {
     content: "";
     position: absolute;
     width: 0;
@@ -83,13 +82,20 @@ export const NavLink = styled(Link)`
     background: ${({ theme }: { theme: Theme }) => theme.primary};
     transition: all 0.3s ease;
     transform: translateX(-50%);
+    border-radius: 2px;
   }
 
   &:hover {
     color: ${({ theme }: { theme: Theme }) => theme.primary};
-    &:after {
+    transform: translateY(-1px);
+
+    &:before {
       width: 100%;
     }
+  }
+
+  &:active {
+    transform: translateY(0);
   }
 `;
 
@@ -110,6 +116,8 @@ export const CustomNavLink = styled("div")`
 `;
 
 export const Burger = styled("div")`
+  display: none; // Hide by default on desktop
+
   @media only screen and (max-width: 890px) {
     display: block;
     position: relative;
@@ -146,64 +154,76 @@ export const Menu = styled("h5")`
 export const CustomNavLinkSmall = styled(Link)`
   font-size: 1.2rem;
   color: ${({ theme }: { theme: Theme }) => theme.text};
-  transition: color 0.2s ease-in-out;
+  transition: all 0.3s ease;
   margin: 0.5rem 2rem;
   cursor: pointer;
   text-decoration: none;
   position: relative;
   width: auto;
+  display: block;
 
-  &:after {
+  &:before {
     content: "";
     position: absolute;
-    width: 100%;
+    width: 0;
     height: 2px;
     bottom: -2px;
-    left: 0;
-    background: ${({ theme }: { theme: Theme }) => theme.text};
-    transform: scaleX(0);
-    transform-origin: right;
-    transition: transform 0.3s ease;
+    left: 50%;
+    background: ${({ theme }: { theme: Theme }) => theme.primary};
+    transition: all 0.3s ease;
+    transform: translateX(-50%);
+    border-radius: 2px;
   }
 
   &:hover {
     color: ${({ theme }: { theme: Theme }) => theme.primary};
-    &:after {
-      transform: scaleX(1);
-      transform-origin: left;
+    transform: translateX(5px);
+
+    &:before {
+      width: 100%;
     }
+  }
+
+  &:active {
+    transform: translateX(2px);
   }
 `;
 
 export const ScrollNavLink = styled.div`
   font-size: 1.2rem;
   color: ${({ theme }: { theme: Theme }) => theme.text};
-  transition: color 0.2s ease-in-out;
+  transition: all 0.3s ease;
   margin: 0.5rem 2rem;
   cursor: pointer;
   text-decoration: none;
   position: relative;
   width: auto;
+  display: block;
 
-  &:after {
+  &:before {
     content: "";
     position: absolute;
-    width: 100%;
+    width: 0;
     height: 2px;
     bottom: -2px;
-    left: 0;
-    background: ${({ theme }: { theme: Theme }) => theme.text};
-    transform: scaleX(0);
-    transform-origin: right;
-    transition: transform 0.3s ease;
+    left: 50%;
+    background: ${({ theme }: { theme: Theme }) => theme.primary};
+    transition: all 0.3s ease;
+    transform: translateX(-50%);
+    border-radius: 2px;
   }
 
   &:hover {
     color: ${({ theme }: { theme: Theme }) => theme.primary};
-    &:after {
-      transform: scaleX(1);
-      transform-origin: left;
+    transform: translateX(5px);
+
+    &:before {
+      width: 100%;
     }
+  }
+
+  &:active {
+    transform: translateX(2px);
   }
 `;
 

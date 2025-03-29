@@ -1,49 +1,35 @@
 import styled from "styled-components";
-import { ButtonProps } from "./types";
 import { Theme } from "../../styles/ThemeContext";
 
-export const StyledButton = styled("button")<ButtonProps>`
-  border: 0;
-  display: inline-block;
-  line-height: 1;
-  font-size: 1rem;
-  font-weight: 500;
-  color: ${({ theme }: { theme: Theme }) => theme.text};
+interface ButtonProps {
+  color?: string;
+  fixedWidth?: string;
+}
+
+export const Button = styled("button")<ButtonProps>`
   border-radius: 4px;
-  padding: 0.5rem 1rem;
-  cursor: pointer;
-  transition: all 0.2s ease-in-out;
   background: ${({ color, theme }: { color?: string; theme: Theme }) =>
-    color === "header"
-      ? "transparent"
-      : color === "primary"
+    color === "primary"
       ? theme.primary
-      : theme.secondary};
-  box-shadow: ${({ color, theme }: { color?: string; theme: Theme }) =>
-    color === "header" ? "none" : `0 2px 4px ${theme.shadow}`};
+      : color === "secondary"
+      ? theme.secondary
+      : color === "header"
+      ? "transparent"
+      : theme.primary};
+  color: ${({ color, theme }: { color?: string; theme: Theme }) =>
+    color === "header" ? theme.text : theme.body};
+  padding: ${({ color }: { color?: string }) =>
+    color === "header" ? "0.5rem 1.5rem" : "0.8rem 2.5rem"};
+  font-weight: 500;
+  cursor: pointer;
+  width: ${({ fixedWidth }: { fixedWidth?: string }) =>
+    fixedWidth ? fixedWidth : "auto"};
+  border: ${({ color, theme }: { color?: string; theme: Theme }) =>
+    color === "header" ? `2px solid ${theme.primary}` : "none"};
   position: relative;
   overflow: hidden;
-
-  &:hover {
-    transform: translateY(-2px);
-    box-shadow: ${({ color, theme }: { color?: string; theme: Theme }) =>
-      color === "header" ? "none" : `0 4px 8px ${theme.shadow}`};
-  }
-
-  &:active {
-    transform: translateY(0);
-  }
-
-  &:focus {
-    outline: none;
-    box-shadow: ${({ color, theme }: { color?: string; theme: Theme }) =>
-      color === "header" ? "none" : `0 0 0 2px ${theme.accent}`};
-  }
-
-  &:disabled {
-    opacity: 0.6;
-    cursor: not-allowed;
-  }
+  transition: all 0.3s ease;
+  z-index: 1;
 
   &:before {
     content: "";
@@ -58,60 +44,47 @@ export const StyledButton = styled("button")<ButtonProps>`
       rgba(255, 255, 255, 0.2),
       transparent
     );
-    transition: 0.5s;
+    transition: all 0.5s ease;
+    z-index: -1;
   }
 
-  &:hover:before {
-    left: 100%;
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    border-color: ${({ color, theme }: { color?: string; theme: Theme }) =>
+      color === "header" ? theme.primary : "transparent"};
+
+    &:before {
+      left: 100%;
+    }
   }
 
-  &:after {
-    content: "";
-    position: absolute;
-    width: 100%;
-    height: 2px;
-    bottom: -2px;
-    left: 0;
-    background: ${({ theme }: { theme: Theme }) => theme.text};
-    transform: scaleX(0);
-    transform-origin: right;
-    transition: transform 0.3s ease;
+  &:active {
+    transform: translateY(1px);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
   }
 
-  &:hover:after {
-    transform: scaleX(1);
-    transform-origin: left;
+  &:focus {
+    outline: none;
+    box-shadow: 0 0 0 3px
+      ${({ color, theme }: { color?: string; theme: Theme }) =>
+        color === "header" ? `${theme.primary}40` : `${theme.primary}40`};
   }
 
-  ${({ color, theme }: { color?: string; theme: Theme }) =>
-    color === "header" &&
-    `
-    background: transparent;
+  &:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+    transform: none;
     box-shadow: none;
-    padding: 0;
-    margin: 0 1rem;
-    font-size: 1rem;
-    font-weight: 500;
-    color: ${theme.text};
-    border: none;
-    position: relative;
-    
-    &:after {
-      content: '';
-      position: absolute;
-      width: 100%;
-      height: 2px;
-      bottom: -2px;
-      left: 0;
-      background: ${theme.text};
-      transform: scaleX(0);
-      transform-origin: right;
-      transition: transform 0.3s ease;
+
+    &:hover {
+      border-color: inherit;
     }
-    
-    &:hover:after {
-      transform: scaleX(1);
-      transform-origin: left;
-    }
-  `}
+  }
+
+  @media only screen and (max-width: 768px) {
+    padding: ${({ color }: { color?: string }) =>
+      color === "header" ? "0.4rem 1.2rem" : "0.6rem 2rem"};
+    font-size: 0.9rem;
+  }
 `;

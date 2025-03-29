@@ -1,4 +1,4 @@
-import { StyledButton } from "./styles";
+import { Button as StyledButton } from "./styles";
 import { ButtonProps } from "./types";
 
 export const Button = ({ color, children, onClick, name }: ButtonProps) => (
