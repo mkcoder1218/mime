@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Row, Col, Drawer } from "antd";
+import { Row, Col } from "antd";
 import { withTranslation, TFunction } from "react-i18next";
 import Container from "../../common/Container";
 import { Button } from "../../common/Button";
@@ -20,6 +20,7 @@ import {
   Span,
   ThemeToggleButton,
   NavLink,
+  Drawer,
 } from "./styles";
 import { Link } from "react-router-dom";
 
@@ -95,10 +96,19 @@ const Header = ({ t }: { t: TFunction }) => {
             </ThemeToggleButton>
           </NotHidden>
           <Burger>
-            <Outline onClick={toggleButton} />
+            <Outline
+              onClick={toggleButton}
+              className={visible ? "active" : ""}
+            />
           </Burger>
         </Row>
-        <Drawer closable={false} visible={visible} onClose={toggleButton}>
+        <Drawer
+          placement="right"
+          closable={false}
+          onClose={toggleButton}
+          open={visible}
+          width={300}
+        >
           <Col style={{ marginBottom: "2rem" }}>
             <Label onClick={toggleButton}>
               <Col span={24}>

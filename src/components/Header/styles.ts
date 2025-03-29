@@ -2,6 +2,7 @@ import styled from "styled-components";
 import { Link } from "react-router-dom";
 import { MenuOutlined } from "@ant-design/icons";
 import { Theme } from "../../styles/ThemeContext";
+import { Drawer as AntDrawer } from "antd";
 
 export const HeaderSection = styled("header")`
   padding: 1.5rem 0;
@@ -109,16 +110,18 @@ export const CustomNavLink = styled("div")`
 `;
 
 export const Burger = styled("div")`
-  display: none;
-  align-items: center;
-  height: 100%;
-
   @media only screen and (max-width: 890px) {
-    display: flex;
+    display: block;
+    position: relative;
+    width: 30px;
+    height: 30px;
+    cursor: pointer;
+    z-index: 2;
   }
 
-  svg {
-    fill: ${({ theme }: { theme: Theme }) => theme.text};
+  @media only screen and (max-width: 414px) {
+    width: 25px;
+    height: 25px;
   }
 `;
 
@@ -214,11 +217,49 @@ export const Label = styled("span")`
   height: 100%;
 `;
 
-export const Outline = styled(MenuOutlined)`
-  font-size: 22px;
-  color: ${({ theme }: { theme: Theme }) => theme.text};
-  display: flex;
-  align-items: center;
+export const Outline = styled("button")`
+  @media only screen and (max-width: 890px) {
+    position: relative;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+    height: 100%;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    transition: all 0.3s ease;
+
+    &:before,
+    &:after {
+      content: "";
+      position: absolute;
+      width: 100%;
+      height: 2px;
+      background: ${({ theme }: { theme: Theme }) => theme.text};
+      transition: all 0.3s ease;
+    }
+
+    &:before {
+      transform: translateY(-8px);
+    }
+
+    &:after {
+      transform: translateY(8px);
+    }
+
+    &.active {
+      &:before {
+        transform: rotate(45deg);
+      }
+
+      &:after {
+        transform: rotate(-45deg);
+      }
+    }
+  }
 `;
 
 export const Span = styled("span")`
@@ -250,5 +291,29 @@ export const ThemeToggleButton = styled.button`
 
   &:focus {
     outline: none;
+  }
+`;
+
+export const Drawer = styled(AntDrawer)`
+  .ant-drawer-content-wrapper {
+    width: 300px !important;
+  }
+
+  .ant-drawer-content {
+    background: ${({ theme }: { theme: Theme }) => theme.background};
+    padding: 2rem;
+  }
+
+  .ant-drawer-header {
+    background: ${({ theme }: { theme: Theme }) => theme.background};
+    border-bottom: 1px solid ${({ theme }: { theme: Theme }) => theme.text};
+  }
+
+  .ant-drawer-title {
+    color: ${({ theme }: { theme: Theme }) => theme.text};
+  }
+
+  .ant-drawer-close {
+    color: ${({ theme }: { theme: Theme }) => theme.text};
   }
 `;
