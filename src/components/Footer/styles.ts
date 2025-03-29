@@ -2,14 +2,15 @@ import styled from "styled-components";
 import { Link } from "react-router-dom";
 
 export const FooterSection = styled("footer")`
-  background: rgb(241, 242, 243);
+  background: ${({ theme }) => theme.body};
   padding: 2.5rem 0;
+  border-top: 1px solid ${({ theme }) => theme.text};
 `;
 
 export const Title = styled("h4")`
   font-size: 22px;
   text-transform: capitalize;
-  color: #18216d;
+  color: ${({ theme }) => theme.text};
 
   @media screen and (max-width: 414px) {
     padding: 1.5rem 0;
@@ -21,21 +22,23 @@ export const NavLink = styled(Link)`
   font-size: 1rem;
   margin-bottom: 0.625rem;
   transition: all 0.2s ease-in-out;
+  color: ${({ theme }) => theme.text};
 
   &:hover,
   &:active,
   &:focus {
-    color: #15418e;
+    color: ${({ theme }) => theme.text};
   }
 `;
 
 export const Extra = styled("section")`
-  background: rgb(241, 242, 243);
+  background: ${({ theme }) => theme.body};
   position: relative;
   width: 100%;
   margin-right: auto;
   margin-left: auto;
   padding-bottom: 2rem;
+  border-top: 1px solid ${({ theme }) => theme.text};
 `;
 
 export const LogoContainer = styled("div")`
@@ -44,14 +47,14 @@ export const LogoContainer = styled("div")`
 `;
 
 export const Para = styled("div")`
-  color: #18216d;
+  color: ${({ theme }) => theme.text};
   font-size: 14px;
   width: 70%;
 `;
 
 export const Large = styled(Link)`
   font-size: 16px;
-  color: #000;
+  color: ${({ theme }) => theme.text};
   cursor: pointer;
   transition: all 0.2s ease-in-out;
   text-transform: capitalize;
@@ -62,23 +65,23 @@ export const Large = styled(Link)`
   max-width: max-content;
 
   &:hover {
-    color: rgb(255, 130, 92);
+    color: ${({ theme }) => theme.text};
     text-underline-position: under;
-    text-decoration: rgb(255, 130, 92) wavy underline;
+    text-decoration: ${({ theme }) => theme.text} wavy underline;
   }
 `;
 
 export const Chat = styled("p")`
-  color: #18216d;
+  color: ${({ theme }) => theme.text};
   max-width: fit-content;
-  border-bottom: 1px solid #18216d;
+  border-bottom: 1px solid ${({ theme }) => theme.text};
   cursor: pointer;
   margin-top: 1rem;
   transition: all 0.3s ease-in-out;
 
   &:hover {
-    border-bottom: 1px solid rgb(255, 130, 92);
-    color: rgb(255, 130, 92);
+    border-bottom: 1px solid ${({ theme }) => theme.text};
+    color: ${({ theme }) => theme.text};
   }
 `;
 
@@ -121,7 +124,7 @@ export const FooterContainer = styled("div")`
     height: 25px;
 
     &:hover {
-      fill: rgb(255, 130, 92);
+      fill: ${({ theme }) => theme.text};
     }
   }
 `;
@@ -129,7 +132,7 @@ export const FooterContainer = styled("div")`
 export const Language = styled("h4")`
   font-size: 22px;
   text-transform: capitalize;
-  color: #18216d;
+  color: ${({ theme }) => theme.text};
 
   @media screen and (max-width: 414px) {
     padding: 1.5rem 0;
@@ -139,7 +142,7 @@ export const Language = styled("h4")`
 export const Label = styled("label")`
   font-size: 22px;
   text-transform: capitalize;
-  color: #18216d;
+  color: ${({ theme }) => theme.text};
   display: block;
   margin-bottom: 2rem;
   font-family: "Motiva Sans Bold", serif;

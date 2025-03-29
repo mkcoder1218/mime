@@ -1,28 +1,86 @@
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 import { MenuOutlined } from "@ant-design/icons";
+import { Theme } from "../../styles/ThemeContext";
 
 export const HeaderSection = styled("header")`
-  padding: 1rem 0.5rem;
+  padding: 1.5rem 0;
+  background: ${({ theme }: { theme: Theme }) => theme.body};
 
   .ant-row-space-between {
     align-items: center;
     text-align: center;
+    display: flex;
+    justify-content: space-between;
+    height: 64px;
+    padding: 0;
+    margin: 0;
+  }
+
+  @media only screen and (max-width: 768px) {
+    padding: 1rem 0;
   }
 `;
 
 export const LogoContainer = styled(Link)`
   display: flex;
+  align-items: center;
+  height: 100%;
+  padding: 0 1rem;
+  cursor: pointer;
+  text-decoration: none;
+  position: relative;
+  font-weight: 500;
+  transition: color 0.3s ease;
+  line-height: 1;
+  margin: 0;
+
+  &:hover {
+    color: ${({ theme }: { theme: Theme }) => theme.primary};
+  }
 `;
 
-export const NavLink = styled("div")`
-  display: inline-block;
-  text-align: center;
+export const NavLink = styled(Link)`
+  color: ${({ theme }: { theme: Theme }) => theme.text};
+  display: flex;
+  align-items: center;
+  padding: 0 1rem;
+  cursor: pointer;
+  height: 100%;
+  text-decoration: none;
+  position: relative;
+  font-weight: 500;
+  transition: color 0.3s ease;
+  margin: 0;
+
+  &:after {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 2px;
+    bottom: -2px;
+    left: 0;
+    background: ${({ theme }: { theme: Theme }) => theme.text};
+    transform: scaleX(0);
+    transform-origin: right;
+    transition: transform 0.3s ease;
+  }
+
+  &:hover {
+    color: ${({ theme }: { theme: Theme }) => theme.primary};
+    &:after {
+      transform: scaleX(1);
+      transform-origin: left;
+    }
+  }
 `;
 
 export const CustomNavLink = styled("div")`
   width: 203px;
   display: inline-block;
+  display: flex;
+  align-items: center;
+  height: 100%;
 
   @media only screen and (max-width: 411px) {
     width: 150px;
@@ -34,18 +92,24 @@ export const CustomNavLink = styled("div")`
 `;
 
 export const Burger = styled("div")`
+  display: none;
+  align-items: center;
+  height: 100%;
+
   @media only screen and (max-width: 890px) {
-    display: block;
+    display: flex;
   }
 
-  display: none;
-
   svg {
-    fill: #2e186a;
+    fill: ${({ theme }: { theme: Theme }) => theme.text};
   }
 `;
 
 export const NotHidden = styled("div")`
+  display: flex;
+  align-items: center;
+  height: 100%;
+
   @media only screen and (max-width: 890px) {
     display: none;
   }
@@ -55,41 +119,124 @@ export const Menu = styled("h5")`
   font-size: 1.5rem;
   font-weight: 600;
   text-align: center;
+  color: ${({ theme }: { theme: Theme }) => theme.text};
+  margin: 0;
 `;
 
-export const CustomNavLinkSmall = styled(NavLink)`
+export const CustomNavLinkSmall = styled(Link)`
   font-size: 1.2rem;
-  color: #18216d;
-  transition: color 0.2s ease-in;
+  color: ${({ theme }: { theme: Theme }) => theme.text};
+  transition: color 0.2s ease-in-out;
   margin: 0.5rem 2rem;
+  cursor: pointer;
+  text-decoration: none;
+  position: relative;
+  width: auto;
 
-  @media only screen and (max-width: 768px) {
-    margin: 1.25rem 2rem;
+  &:after {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 2px;
+    bottom: -2px;
+    left: 0;
+    background: ${({ theme }: { theme: Theme }) => theme.text};
+    transform: scaleX(0);
+    transform-origin: right;
+    transition: transform 0.3s ease;
+  }
+
+  &:hover {
+    color: ${({ theme }: { theme: Theme }) => theme.primary};
+    &:after {
+      transform: scaleX(1);
+      transform-origin: left;
+    }
+  }
+`;
+
+export const ScrollNavLink = styled.div`
+  font-size: 1.2rem;
+  color: ${({ theme }: { theme: Theme }) => theme.text};
+  transition: color 0.2s ease-in-out;
+  margin: 0.5rem 2rem;
+  cursor: pointer;
+  text-decoration: none;
+  position: relative;
+  width: auto;
+
+  &:after {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 2px;
+    bottom: -2px;
+    left: 0;
+    background: ${({ theme }: { theme: Theme }) => theme.text};
+    transform: scaleX(0);
+    transform-origin: right;
+    transition: transform 0.3s ease;
+  }
+
+  &:hover {
+    color: ${({ theme }: { theme: Theme }) => theme.primary};
+    &:after {
+      transform: scaleX(1);
+      transform-origin: left;
+    }
   }
 `;
 
 export const Label = styled("span")`
   font-weight: 500;
-  color: #404041;
+  color: ${({ theme }: { theme: Theme }) => theme.text};
   text-align: right;
   display: flex;
   justify-content: space-between;
-  align-items: baseline;
+  align-items: center;
+  height: 100%;
 `;
 
 export const Outline = styled(MenuOutlined)`
   font-size: 22px;
+  color: ${({ theme }: { theme: Theme }) => theme.text};
+  display: flex;
+  align-items: center;
 `;
 
 export const Span = styled("span")`
   cursor: pointer;
   transition: all 0.3s ease-in-out;
+  color: ${({ theme }: { theme: Theme }) => theme.text};
+  display: flex;
+  align-items: center;
 
   &:hover,
   &:active,
   &:focus {
-    color: rgb(255, 130, 92);
+    color: ${({ theme }: { theme: Theme }) => theme.text};
     text-underline-position: under;
-    text-decoration: rgb(255, 130, 92) wavy underline;
+    text-decoration: ${({ theme }: { theme: Theme }) => theme.text} wavy
+      underline;
+  }
+`;
+
+export const ThemeToggleButton = styled.button`
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0.5rem;
+  margin-left: 1rem;
+  display: flex;
+  align-items: center;
+  height: 100%;
+  color: ${({ theme }: { theme: Theme }) => theme.text};
+
+  @media only screen and (max-width: 890px) {
+    margin: 0;
+  }
+
+  &:focus {
+    outline: none;
   }
 `;

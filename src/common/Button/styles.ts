@@ -1,25 +1,117 @@
 import styled from "styled-components";
+import { ButtonProps } from "./types";
+import { Theme } from "../../styles/ThemeContext";
 
-export const StyledButton = styled("button")<{ color?: string }>`
-  background: ${(p) => p.color || "#2e186a"};
-  color: ${(p) => (p.color ? "#2E186A" : "#fff")};
+export const StyledButton = styled("button")<ButtonProps>`
+  border: 0;
+  display: inline-block;
+  line-height: 1;
   font-size: 1rem;
-  font-weight: 700;
-  width: 100%;
-  border: 1px solid #edf3f5;
+  font-weight: 500;
+  color: ${({ theme }: { theme: Theme }) => theme.text};
   border-radius: 4px;
-  padding: 13px 0;
+  padding: 0.5rem 1rem;
   cursor: pointer;
-  margin-top: 0.625rem;
-  max-width: 180px;
-  transition: all 0.3s ease-in-out;
-  box-shadow: 0 16px 30px rgb(23 31 114 / 20%);
+  transition: all 0.2s ease-in-out;
+  background: ${({ color, theme }: { color?: string; theme: Theme }) =>
+    color === "header"
+      ? "transparent"
+      : color === "primary"
+      ? theme.primary
+      : theme.secondary};
+  box-shadow: ${({ color, theme }: { color?: string; theme: Theme }) =>
+    color === "header" ? "none" : `0 2px 4px ${theme.shadow}`};
+  position: relative;
+  overflow: hidden;
 
-  &:hover,
-  &:active,
-  &:focus {
-    color: #fff;
-    border: 1px solid rgb(255, 130, 92);
-    background-color: rgb(255, 130, 92);
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: ${({ color, theme }: { color?: string; theme: Theme }) =>
+      color === "header" ? "none" : `0 4px 8px ${theme.shadow}`};
   }
+
+  &:active {
+    transform: translateY(0);
+  }
+
+  &:focus {
+    outline: none;
+    box-shadow: ${({ color, theme }: { color?: string; theme: Theme }) =>
+      color === "header" ? "none" : `0 0 0 2px ${theme.accent}`};
+  }
+
+  &:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+  }
+
+  &:before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+      120deg,
+      transparent,
+      rgba(255, 255, 255, 0.2),
+      transparent
+    );
+    transition: 0.5s;
+  }
+
+  &:hover:before {
+    left: 100%;
+  }
+
+  &:after {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 2px;
+    bottom: -2px;
+    left: 0;
+    background: ${({ theme }: { theme: Theme }) => theme.text};
+    transform: scaleX(0);
+    transform-origin: right;
+    transition: transform 0.3s ease;
+  }
+
+  &:hover:after {
+    transform: scaleX(1);
+    transform-origin: left;
+  }
+
+  ${({ color, theme }: { color?: string; theme: Theme }) =>
+    color === "header" &&
+    `
+    background: transparent;
+    box-shadow: none;
+    padding: 0;
+    margin: 0 1rem;
+    font-size: 1rem;
+    font-weight: 500;
+    color: ${theme.text};
+    border: none;
+    position: relative;
+    
+    &:after {
+      content: '';
+      position: absolute;
+      width: 100%;
+      height: 2px;
+      bottom: -2px;
+      left: 0;
+      background: ${theme.text};
+      transform: scaleX(0);
+      transform-origin: right;
+      transition: transform 0.3s ease;
+    }
+    
+    &:hover:after {
+      transform: scaleX(1);
+      transform-origin: left;
+    }
+  `}
 `;

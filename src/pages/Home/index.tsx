@@ -1,4 +1,5 @@
 import { lazy } from "react";
+import { withTranslation, TFunction } from "react-i18next";
 import IntroContent from "../../content/IntroContent.json";
 import MiddleBlockContent from "../../content/MiddleBlockContent.json";
 import AboutContent from "../../content/AboutContent.json";
@@ -6,58 +7,62 @@ import MissionContent from "../../content/MissionContent.json";
 import ProductContent from "../../content/ProductContent.json";
 import ContactContent from "../../content/ContactContent.json";
 
-const Contact = lazy(() => import("../../components/ContactForm"));
+const Contact = lazy(() => import("../../components/Contact"));
 const MiddleBlock = lazy(() => import("../../components/MiddleBlock"));
 const Container = lazy(() => import("../../common/Container"));
 const ScrollToTop = lazy(() => import("../../common/ScrollToTop"));
 const ContentBlock = lazy(() => import("../../components/ContentBlock"));
 
-const Home = () => {
+const Home = ({ t }: { t: TFunction }) => {
   return (
     <Container>
       <ScrollToTop />
       <ContentBlock
         direction="right"
-        title={IntroContent.title}
-        content={IntroContent.text}
+        title={t(IntroContent.title)}
+        content={t(IntroContent.text)}
         button={IntroContent.button}
         icon="developer.svg"
         id="intro"
       />
       <MiddleBlock
-        title={MiddleBlockContent.title}
-        content={MiddleBlockContent.text}
-        button={MiddleBlockContent.button}
+        title={t(MiddleBlockContent.title)}
+        content={t(MiddleBlockContent.text)}
+        button={t(MiddleBlockContent.button)}
       />
       <ContentBlock
         direction="left"
-        title={AboutContent.title}
-        content={AboutContent.text}
-        section={AboutContent.section}
+        title={t(AboutContent.title)}
+        content={t(AboutContent.text)}
+        section={AboutContent.section.map((item) => ({
+          ...item,
+          title: t(item.title),
+          content: t(item.content),
+        }))}
         icon="graphs.svg"
         id="about"
       />
       <ContentBlock
         direction="right"
-        title={MissionContent.title}
-        content={MissionContent.text}
+        title={t(MissionContent.title)}
+        content={t(MissionContent.text)}
         icon="product-launch.svg"
         id="mission"
       />
       <ContentBlock
         direction="left"
-        title={ProductContent.title}
-        content={ProductContent.text}
+        title={t(ProductContent.title)}
+        content={t(ProductContent.text)}
         icon="waving.svg"
         id="product"
       />
       <Contact
-        title={ContactContent.title}
-        content={ContactContent.text}
+        title={t(ContactContent.title)}
+        content={t(ContactContent.text)}
         id="contact"
       />
     </Container>
   );
 };
 
-export default Home;
+export default withTranslation()(Home);

@@ -27,19 +27,29 @@ export const Styles = createGlobalStyle`
         padding:0;
         border: 0;
         outline: 0;
-        background: #fff;
+        background: ${({ theme }) => theme.body};
+        color: ${({ theme }) => theme.text};
         overflow-x: hidden;
+        transition: background-color 0.3s ease, color 0.3s ease;
     }
 
-    a:hover {
-        color: #18216d;
+    a {
+        text-decoration: none;
+        outline: none;
+        color: ${({ theme }) => theme.linkColor};
+        transition: color 0.3s ease;
+
+        &:hover {
+            color: ${({ theme }) => theme.linkHover};
+        }
     }
 
     input,
     textarea {
         border-radius: 4px;
         border: 0;
-        background: rgb(241, 242, 243);
+        background: ${({ theme }) => theme.inputBackground};
+        color: ${({ theme }) => theme.text};
         transition: all 0.3s ease-in-out;  
         outline: none;
         width: 100%;  
@@ -47,7 +57,7 @@ export const Styles = createGlobalStyle`
 
         :focus-within {
             background: none;
-            box-shadow: #2e186a 0px 0px 0px 1px;
+            box-shadow: ${({ theme }) => theme.inputFocus} 0px 0px 0px 1px;
         }
     }
 
@@ -58,7 +68,7 @@ export const Styles = createGlobalStyle`
     h5,
     h6 {
         font-family: 'Motiva Sans Bold', serif;
-        color: #18216d;
+        color: ${({ theme }) => theme.text};
         font-size: 56px;
         line-height: 1.18;
 
@@ -72,7 +82,7 @@ export const Styles = createGlobalStyle`
     }
 
     p {
-        color: #18216d;
+        color: ${({ theme }) => theme.text};
         font-size: 21px;        
         line-height: 1.41;
     }
@@ -81,16 +91,6 @@ export const Styles = createGlobalStyle`
         font-weight: 600;
     }
 
-    a {
-        text-decoration: none;
-        outline: none;
-        color: #2E186A;
-
-        :hover {
-            color: #2e186a;
-        }
-    }
-    
     *:focus {
         outline: none;
     }

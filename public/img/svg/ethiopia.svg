@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="30" height="30" viewBox="0 0 30 30" xmlns="http://www.w3.org/2000/svg">
+  <!-- Green stripe -->
+  <rect x="0" y="0" width="30" height="10" fill="#078930"/>
+  <!-- Yellow stripe -->
+  <rect x="0" y="10" width="30" height="10" fill="#FCDD0A"/>
+  <!-- Red stripe -->
+  <rect x="0" y="20" width="30" height="10" fill="#DA1219"/>
+  <!-- Blue circle -->
+  <circle cx="15" cy="15" r="6" fill="#0F47AF"/>
+  <!-- Yellow star -->
+  <path d="M15 10 L16 15 L20 15 L17 18 L18 22 L15 19 L12 22 L13 18 L10 15 L14 15 Z" fill="#FCDD0A"/>
+</svg>

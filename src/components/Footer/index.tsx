@@ -1,6 +1,6 @@
 import { Row, Col } from "antd";
 import { withTranslation, TFunction } from "react-i18next";
-import { SvgIcon } from "../../common/SvgIcon";
+import { ThemedSvgIcon } from "../../common/ThemedSvgIcon";
 import Container from "../../common/Container";
 
 import i18n from "i18next";
@@ -40,7 +40,7 @@ const Footer = ({ t }: { t: TFunction }) => {
         key={src}
         aria-label={src}
       >
-        <SvgIcon src={src} width="25px" height="25px" />
+        <ThemedSvgIcon src={src} width="25px" height="25px" />
       </a>
     );
   };
@@ -75,9 +75,9 @@ const Footer = ({ t }: { t: TFunction }) => {
             <Col lg={10} md={10} sm={12} xs={12}>
               <Empty />
               <Language>{t("Address")}</Language>
-              <Para>Rancho Santa Margarita</Para>
-              <Para>2131 Elk Street</Para>
-              <Para>California</Para>
+              <Para>{t("Rancho Santa Margarita")}</Para>
+              <Para>{t("2131 Elk Street")}</Para>
+              <Para>{t("California")}</Para>
             </Col>
             <Col lg={8} md={8} sm={12} xs={12}>
               <Title>{t("Company")}</Title>
@@ -90,16 +90,16 @@ const Footer = ({ t }: { t: TFunction }) => {
               <Label htmlFor="select-lang">{t("Language")}</Label>
               <LanguageSwitchContainer>
                 <LanguageSwitch onClick={() => handleChange("en")}>
-                  <SvgIcon
+                  <ThemedSvgIcon
                     src="united-states.svg"
                     aria-label="homepage"
                     width="30px"
                     height="30px"
                   />
                 </LanguageSwitch>
-                <LanguageSwitch onClick={() => handleChange("es")}>
-                  <SvgIcon
-                    src="spain.svg"
+                <LanguageSwitch onClick={() => handleChange("am")}>
+                  <ThemedSvgIcon
+                    src="ethiopia.svg"
                     aria-label="homepage"
                     width="30px"
                     height="30px"
@@ -119,7 +119,7 @@ const Footer = ({ t }: { t: TFunction }) => {
           >
             <NavLink to="/">
               <LogoContainer>
-                <SvgIcon
+                <ThemedSvgIcon
                   src="logo.svg"
                   aria-label="homepage"
                   width="101px"
