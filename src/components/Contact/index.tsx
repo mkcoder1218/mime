@@ -12,8 +12,7 @@ import { ContactContainer, FormGroup, Span, ButtonContainer } from "./styles";
 import { sendTelegramMessage } from "../../common/utils/telegram";
 
 const Contact = ({ title, content, id, t }: ContactProps) => {
-  const { values, errors, handleChange, handleSubmit, resetForm } =
-    useForm(validate);
+  const { values, errors, handleChange, resetForm } = useForm(validate);
 
   const ValidationType = ({ type }: ValidationTypeProps) => {
     const ErrorMessage = errors[type as keyof typeof errors];

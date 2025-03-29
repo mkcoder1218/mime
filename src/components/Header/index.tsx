@@ -1,10 +1,9 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { Row, Col } from "antd";
 import { withTranslation, TFunction } from "react-i18next";
 import Container from "../../common/Container";
 import { Button } from "../../common/Button";
 import { useTheme } from "../../styles/ThemeContext";
-import { useTranslation } from "react-i18next";
 import { Switch } from "../ui/switch";
 import {
   HeaderSection,
@@ -22,7 +21,6 @@ import {
   NavLink,
   Drawer,
 } from "./styles";
-import { Link } from "react-router-dom";
 
 const Header = ({ t }: { t: TFunction }) => {
   const [visible, setVisibility] = useState(false);
