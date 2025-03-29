@@ -24,17 +24,39 @@ const Contact = ({ title, content, id, t }: ContactProps) => {
     e.preventDefault();
 
     if (Object.keys(errors).length === 0) {
-      const success = await sendTelegramMessage(
-        values.name || "",
-        values.email || "",
-        values.message || ""
-      );
+      try {
+        console.log("Form submitted with values:", {
+          name: values.name,
+          email: values.email,
+          message: values.message,
+        });
 
-      if (success) {
-        message.success(t("Message sent successfully!"));
-        resetForm();
-      } else {
-        message.error(t("Failed to send message. Please try again."));
+        const success = await sendTelegramMessage(
+          values.name || "",
+          values.email || "",
+          values.message || ""
+        );
+
+        if (success) {
+          message.success(t("Message sent successfully!"));
+          resetForm();
+        } else {
+          message.error(
+            t("Failed to send message. Please check the console for details.")
+          );
+          console.error(
+            "Message sending failed. Check the console for more details."
+          );
+        }
+      } catch (error) {
+        console.error("Form submission error:", error);
+        if (error instanceof Error) {
+          message.error(t("Error: ") + error.message);
+        } else {
+          message.error(
+            t("An unexpected error occurred. Please try again later.")
+          );
+        }
       }
     }
   };
